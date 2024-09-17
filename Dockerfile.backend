@@ -1,0 +1,14 @@
+# 使用官方 Go 语言镜像
+FROM golang:1.20
+
+# 设置工作目录
+WORKDIR /app
+
+# 将 backend 目录下的代码复制到容器中
+COPY ./backend/ ./
+
+# 初始化 Go 模块并下载依赖
+RUN go mod init backend && go mod tidy
+
+# 使用 ENTRYPOINT 来确保在容器启动时重新编译并运行
+ENTRYPOINT go build -o /app/main /app/main.go && /app/main
