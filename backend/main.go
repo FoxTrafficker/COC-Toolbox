@@ -41,7 +41,7 @@ func getAttributesHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	log.Println("version 0.6")
+	log.Println("version 0.0.6")
 	// Parse the React server URL (IPv4 127.0.0.1)
 	reactURL, err := url.Parse("http://frontend:3000")
 	if err != nil {
