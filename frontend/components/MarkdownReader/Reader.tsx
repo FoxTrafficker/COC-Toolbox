@@ -4,7 +4,7 @@ import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import {Paper} from "@mui/material";
 
-function MarkdownReader({filePath}) {
+function MarkdownReader({filePath}: { filePath: string }) {
     const [content, setContent] = useState("");
 
     useEffect(() => {
