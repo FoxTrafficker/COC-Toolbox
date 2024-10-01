@@ -2,7 +2,7 @@
 
 import "./globals.css";
 import {Inter} from "next/font/google";
-import React, {useState} from "react";
+import React from "react";
 import SideBar from "@/components/SideBar";
 
 const inter = Inter({subsets: ["latin"]});

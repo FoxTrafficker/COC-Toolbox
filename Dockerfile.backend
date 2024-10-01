@@ -1,14 +1,38 @@
-# 使用官方 Go 语言镜像
-FROM golang:1.20
+# 编译阶段：使用 Go 官方镜像编译程序
+FROM golang:1.23-alpine AS builder
 
 # 设置工作目录
 WORKDIR /app
 
-# 将 backend 目录下的代码复制到容器中
+# 将 go.mod 和 go.sum 文件复制到容器中
+COPY ./backend/go.mod ./backend/go.sum ./
+
+# 下载依赖
+RUN go mod download
+
+# 将 backend 源代码和配置文件复制到容器中
 COPY ./backend/ ./
 
-# 初始化 Go 模块并下载依赖
-RUN go mod init backend && go mod tidy
+# 编译 Go 程序，指定入口文件为 cmd/main.go
+RUN go build -o myapp ./cmd
 
-# 使用 ENTRYPOINT 来确保在容器启动时重新编译并运行
-ENTRYPOINT go build -o /app/main /app/main.go && /app/main
+# 部署阶段：使用极小的基础镜像
+FROM alpine:latest
+
+# 设置工作目录
+WORKDIR /root/
+
+# 从编译阶段复制编译好的二进制文件
+COPY --from=builder /app/myapp .
+
+# 从编译阶段复制配置文件和数据库文件
+COPY --from=builder /app/config ./config
+COPY --from=builder /app/db ./db
+
+# 赋予二进制文件可执行权限
+RUN chmod +x ./myapp
+
+EXPOSE 8000
+
+# 运行二进制文件
+CMD ["./myapp"]

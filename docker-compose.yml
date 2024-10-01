@@ -1,24 +1,30 @@
 version: '3'
 services:
+
   backend:
     build:
       context: .
       dockerfile: Dockerfile.backend
+    image: foxtrafficker/coc-toolbox:backend-latest
     ports:
-      - "8080:8080"  # 将主机的8080端口映射到容器的8080端口
-    volumes:
-      - ./backend:/app  # 挂载主机的 ./backend 目录到容器的 /app 目录
+      - "8000:8000"
     networks:
       - myapp-network
+
 
   frontend:
     build:
       context: .
       dockerfile: Dockerfile.frontend
+    image: foxtrafficker/coc-toolbox:frontend-latest
+    deploy:
+      resources:
+        limits:
+          memory: 512M  # 设置内存限制为 512 MB
+        reservations:
+          memory: 256M  # 设置内存保留为 256 MB
     ports:
-      - "3000:3000"  # 将主机的3000端口映射到容器内的3000端口（Next.js 默认端口）
-    volumes:
-      - ./frontend:/app  # 挂载主机的 ./frontend 目录到容器的 /app 目录
+      - "3000:3000"
     networks:
       - myapp-network
 
