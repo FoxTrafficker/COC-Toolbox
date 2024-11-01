@@ -143,7 +143,6 @@ func HandleMessages() {
 	}
 }
 
-// 带有限制的重试机制，重试3次
 func sendWithRetries(client *websocket.Conn, msg interface{}, retries int) error {
 	for i := 0; i < retries; i++ {
 		err := client.WriteJSON(msg)
@@ -163,7 +162,6 @@ func sendWithRetries(client *websocket.Conn, msg interface{}, retries int) error
 	return fmt.Errorf("发送消息失败，超过最大重试次数")
 }
 
-// 保存角色状态到文件
 func saveCharacters() {
 	mu.Lock()
 	defer mu.Unlock()
@@ -171,7 +169,6 @@ func saveCharacters() {
 	_ = ioutil.WriteFile("db/characters.json", data, 0644)
 }
 
-// 加载角色状态
 func LoadCharacters() {
 	file, err := os.Open("db/characters.json")
 	if err != nil {

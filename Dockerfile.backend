@@ -19,6 +19,9 @@ RUN go build -o myapp ./cmd
 # 部署阶段：使用极小的基础镜像
 FROM alpine:latest
 
+# 安装基本工具，确保文件服务可用
+RUN apk --no-cache add ca-certificates
+
 # 设置工作目录
 WORKDIR /root/
 
@@ -32,6 +35,7 @@ COPY --from=builder /app/db ./db
 # 赋予二进制文件可执行权限
 RUN chmod +x ./myapp
 
+# 暴露端口
 EXPOSE 8000
 
 # 运行二进制文件

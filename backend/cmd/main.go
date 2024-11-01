@@ -46,5 +46,11 @@ func main() {
 	websocket.LoadCharacters()
 	go websocket.HandleMessages()
 	http.HandleFunc("/ws", websocket.HandleConnections)
+
+	fs := http.FileServer(http.Dir("./db/avatars"))
+	http.HandleFunc("/avatars/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Printf("Received request:\nMethod: %s\nPath: %s\n", r.Method, r.URL.Path)
+		http.StripPrefix("/avatars", fs).ServeHTTP(w, r)
+	})
 	proxy.ReverseProxy()
 }

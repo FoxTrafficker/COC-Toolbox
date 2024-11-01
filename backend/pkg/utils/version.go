@@ -15,10 +15,6 @@ type Config struct {
 }
 
 func Version() {
-	// 运行一次4位+1
-	// 实现一个功能3位+1
-	// 实现一个页面2位+1
-	// 做出来稳定版本了首位+1
 	jsonData, err := os.ReadFile("config/config.json")
 	if err != nil {
 		log.Fatalf("无法读取配置文件: %v", err)
