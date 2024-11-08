@@ -12,16 +12,13 @@ interface WebSocketMessage {
     payload: string;
 }
 
-const CharacterList = ({characters, deleteCharacter}: {
-    characters: Character[];
-    deleteCharacter: (index: number) => void;
-}) => {
+const CharacterList = ({characters, deleteCharacter}: { characters: Character[]; deleteCharacter: (index: number) => void }) => {
     return (
         <div style={styles.indicator}>
             {characters.map((character, index) => (
                 <div key={index} style={styles.character}>
                     <img
-                        src={"http://localhost:8000"+character.avatar}
+                        src={"http://localhost:8000" + character.avatar}
                         alt={character.name}
                         style={styles.avatar}
                     />
@@ -116,7 +113,7 @@ const Home: React.FC = () => {
         const newCharacter: Character = {
             name: newName,
             agility: parseInt(newAgility),
-            avatar: `/avatars/default-avatar.png`,
+            avatar: `/avatars/default.webp`,
         };
         const updatedCharacters = [...characters, newCharacter].sort((a, b) => b.agility - a.agility);
         setCharacters(updatedCharacters);

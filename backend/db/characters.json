@@ -1,27 +1,27 @@
 [
   {
-    "name": "艾米丽·卡特",
+    "name": "艾米丽",
     "agility": 75,
-    "avatar": "/avatars/default-avatar.jpg"
+    "avatar": "/avatars/艾米丽.png"
   },
   {
     "name": "姜子瑜",
     "agility": 60,
-    "avatar": "/avatars/default-avatar.jpg"
+    "avatar": "/avatars/姜子瑜.jpg"
   },
   {
     "name": "梅喵",
     "agility": 50,
-    "avatar": "/avatars/default-avatar.jpg"
+    "avatar": "/avatars/梅喵.jpg"
   },
   {
     "name": "康师傅",
     "agility": 40,
-    "avatar": "/avatars/default-avatar.jpg"
+    "avatar": "/avatars/康师傅.jpg"
   },
   {
     "name": "z",
     "agility": 35,
-    "avatar": "/avatars/default-avatar.jpg"
+    "avatar": "/avatars/z.jpg"
   }
 ]
